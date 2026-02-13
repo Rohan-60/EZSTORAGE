@@ -51,7 +51,7 @@ export default function HomePage() {
                 {/* CTA Buttons */}
                 <div className="flex gap-4 justify-center mt-12">
                     <Link
-                        href="/auth/login"
+                        href="/login"
                         className="px-8 py-4 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-600 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                     >
                         Sign In to Dashboard

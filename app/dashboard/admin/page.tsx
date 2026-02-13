@@ -1,14 +1,32 @@
 'use client'
 
-import { useState } from 'react'
 import { formatCurrency, formatDate, getStatusColor, cn } from '@/lib/utils'
+import { useDashboardStats, useOrders, useWarehouses } from '@/lib/hooks/useSupabase'
 
 export default function AdminDashboard() {
-    // Sample data - In production, fetch from Supabase
+    // Fetch real data from Supabase
+    const { data: stats, isLoading: statsLoading } = useDashboardStats()
+    const { data: orders, isLoading: ordersLoading } = useOrders()
+    const { data: warehouses, isLoading: warehousesLoading } = useWarehouses()
+
+    // Calculate order counts by status
+    const ordersByStatus = orders ? [
+        { status: 'Pending', count: orders.filter((o: any) => o.status === 'pending').length, color: 'bg-yellow-500' },
+        { status: 'Scheduled', count: orders.filter((o: any) => o.status === 'scheduled').length, color: 'bg-purple-500' },
+        { status: 'In Transit', count: orders.filter((o: any) => o.status === 'in_transit').length, color: 'bg-indigo-500' },
+        { status: 'Completed', count: orders.filter((o: any) => o.status === 'completed').length, color: 'bg-green-500' },
+    ] : []
+
+    const totalOrders = ordersByStatus.reduce((sum, item) => sum + item.count, 0)
+
+    // Recent orders (last 5)
+    const recentOrders = orders?.slice(0, 5) || []
+
+    // KPI Cards
     const kpiData = [
         {
             title: 'Total Revenue (Month)',
-            value: formatCurrency(145850),
+            value: stats ? formatCurrency(stats.totalRevenue) : '$0.00',
             change: '+12.5%',
             positive: true,
             icon: (
@@ -19,8 +37,8 @@ export default function AdminDashboard() {
         },
         {
             title: 'Active Orders',
-            value: '24',
-            change: '+8',
+            value: stats?.activeOrders.toString() || '0',
+            change: `+${stats?.activeOrders || 0}`,
             positive: true,
             icon: (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,7 +48,7 @@ export default function AdminDashboard() {
         },
         {
             title: 'Warehouse Utilization',
-            value: '78%',
+            value: `${stats?.warehouseUtilization || 0}%`,
             change: '+5%',
             positive: true,
             icon: (
@@ -41,7 +59,7 @@ export default function AdminDashboard() {
         },
         {
             title: 'Active Drivers',
-            value: '8/12',
+            value: `${stats?.activeDrivers || 0}/12`,
             change: '4 available',
             positive: false,
             icon: (
@@ -52,26 +70,16 @@ export default function AdminDashboard() {
         },
     ]
 
-    const ordersByStatus = [
-        { status: 'Pending', count: 8, color: 'bg-yellow-500' },
-        { status: 'Scheduled', count: 12, color: 'bg-purple-500' },
-        { status: 'In Transit', count: 4, color: 'bg-indigo-500' },
-        { status: 'Completed', count: 156, color: 'bg-green-500' },
-    ]
-
-    const recentOrders = [
-        { id: 'ORD-2026-0045', customer: 'John Tan', type: 'Pickup', status: 'scheduled', date: '2026-02-14', amount: 120 },
-        { id: 'ORD-2026-0044', customer: 'Mary Lim', type: 'Delivery', status: 'in_transit', date: '2026-02-13', amount: 180 },
-        { id: 'ORD-2026-0043', customer: 'David Wong', type: 'Both', status: 'completed', date: '2026-02-13', amount: 250 },
-        { id: 'ORD-2026-0042', customer: 'Sarah Ng', type: 'Pickup', status: 'pending', date: '2026-02-15', amount: 120 },
-        { id: 'ORD-2026-0041', customer: 'Michael Chen', type: 'Delivery', status: 'confirmed', date: '2026-02-14', amount: 150 },
-    ]
-
-    const warehouses = [
-        { name: 'Tuas Mega Storage', total: 100, occupied: 82, percentage: 82 },
-        { name: 'Changi Business Park', total: 75, occupied: 58, percentage: 77 },
-        { name: 'Woodlands Industrial', total: 50, occupied: 35, percentage: 70 },
-    ]
+    if (statsLoading || ordersLoading || warehousesLoading) {
+        return (
+            <div className="flex items-center justify-center h-96">
+                <div className="text-center">
+                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+                    <p className="mt-4 text-secondary-600">Loading dashboard...</p>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-6">
@@ -99,20 +107,6 @@ export default function AdminDashboard() {
             </div>
 
             <div className="grid lg:grid-cols-3 gap-6">
-                {/* Revenue Chart Placeholder */}
-                <div className="card lg:col-span-2">
-                    <h3 className="text-lg font-semibold text-secondary-900 mb-4">Revenue Trend (Last 6 Months)</h3>
-                    <div className="h-64 bg-secondary-50 rounded-lg flex items-center justify-center border-2 border-dashed border-secondary-300">
-                        <div className="text-center text-secondary-500">
-                            <svg className="w-16 h-16 mx-auto mb-3 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                            </svg>
-                            <p className="font-medium">Revenue Chart (Recharts)</p>
-                            <p className="text-sm mt-1">Install react query to fetch live data</p>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Orders by Status */}
                 <div className="card">
                     <h3 className="text-lg font-semibold text-secondary-900 mb-6">Orders by Status</h3>
@@ -126,38 +120,43 @@ export default function AdminDashboard() {
                                 <div className="h-2 bg-secondary-100 rounded-full overflow-hidden">
                                     <div
                                         className={cn(item.color, 'h-full transition-all duration-300')}
-                                        style={{ width: `${(item.count / 180) * 100}%` }}
+                                        style={{ width: totalOrders > 0 ? `${(item.count / totalOrders) * 100}%` : '0%' }}
                                     />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </div>
 
-            {/* Warehouse Capacity */}
-            <div className="card">
-                <h3 className="text-lg font-semibold text-secondary-900 mb-4">Warehouse Capacity</h3>
-                <div className="grid md:grid-cols-3 gap-6">
-                    {warehouses.map((warehouse, index) => (
-                        <div key={index} className="space-y-3">
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <p className="font-medium text-secondary-900">{warehouse.name}</p>
-                                    <p className="text-sm text-secondary-600 mt-1">
-                                        {warehouse.occupied} / {warehouse.total} units
-                                    </p>
+                {/* Warehouse Capacity */}
+                <div className="card lg:col-span-2">
+                    <h3 className="text-lg font-semibold text-secondary-900 mb-4">Warehouse Capacity</h3>
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {(warehouses || []).map((warehouse: any, index) => {
+                            const percentage = warehouse.total_units > 0
+                                ? Math.round((warehouse.occupied_units / warehouse.total_units) * 100)
+                                : 0
+                            return (
+                                <div key={index} className="space-y-3">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <p className="font-medium text-secondary-900">{warehouse.name}</p>
+                                            <p className="text-sm text-secondary-600 mt-1">
+                                                {warehouse.occupied_units} / {warehouse.total_units} units
+                                            </p>
+                                        </div>
+                                        <span className="text-2xl font-bold text-primary-600">{percentage}%</span>
+                                    </div>
+                                    <div className="h-3 bg-secondary-100 rounded-full overflow-hidden">
+                                        <div
+                                            className="h-full bg-gradient-to-r from-primary-500 to-primary-600 transition-all duration-300"
+                                            style={{ width: `${percentage}%` }}
+                                        />
+                                    </div>
                                 </div>
-                                <span className="text-2xl font-bold text-primary-600">{warehouse.percentage}%</span>
-                            </div>
-                            <div className="h-3 bg-secondary-100 rounded-full overflow-hidden">
-                                <div
-                                    className="h-full bg-gradient-to-r from-primary-500 to-primary-600 transition-all duration-300"
-                                    style={{ width: `${warehouse.percentage}%` }}
-                                />
-                            </div>
-                        </div>
-                    ))}
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
 
@@ -182,21 +181,23 @@ export default function AdminDashboard() {
                             </tr>
                         </thead>
                         <tbody>
-                            {recentOrders.map((order) => (
+                            {recentOrders.map((order: any) => (
                                 <tr key={order.id} className="table-row">
-                                    <td className="table-cell font-medium text-primary-600">{order.id}</td>
-                                    <td className="table-cell text-secondary-900">{order.customer}</td>
+                                    <td className="table-cell font-medium text-primary-600">{order.order_number}</td>
+                                    <td className="table-cell text-secondary-900">
+                                        {order.customer?.first_name} {order.customer?.last_name}
+                                    </td>
                                     <td className="table-cell">
-                                        <span className="badge badge-primary capitalize">{order.type}</span>
+                                        <span className="badge badge-primary capitalize">{order.job_type}</span>
                                     </td>
                                     <td className="table-cell">
                                         <span className={cn('badge capitalize', getStatusColor(order.status))}>
                                             {order.status.replace('_', ' ')}
                                         </span>
                                     </td>
-                                    <td className="table-cell text-secondary-600">{formatDate(order.date)}</td>
+                                    <td className="table-cell text-secondary-600">{formatDate(order.scheduled_date)}</td>
                                     <td className="table-cell text-right font-medium text-secondary-900">
-                                        {formatCurrency(order.amount)}
+                                        {formatCurrency(order.service_fee || 0)}
                                     </td>
                                 </tr>
                             ))}

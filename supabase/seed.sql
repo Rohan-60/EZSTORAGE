@@ -37,7 +37,7 @@ SELECT
   CASE WHEN generate_series % 3 = 0 THEN 300 WHEN generate_series % 3 = 1 THEN 200 ELSE 150 END,
   250,
   CASE WHEN generate_series % 3 = 0 THEN 450.00 WHEN generate_series % 3 = 1 THEN 280.00 ELSE 180.00 END,
-  CASE WHEN generate_series <= 3 THEN 'occupied' WHEN generate_series <= 7 THEN 'available' ELSE 'reserved' END,
+  CASE WHEN generate_series <= 3 THEN 'occupied'::storage_unit_status WHEN generate_series <= 7 THEN 'available'::storage_unit_status ELSE 'reserved'::storage_unit_status END,
   CASE WHEN generate_series % 2 = 0 THEN true ELSE false END
 FROM generate_series(1, 10);
 
@@ -53,7 +53,7 @@ SELECT
   CASE WHEN generate_series % 2 = 0 THEN 200 ELSE 150 END,
   250,
   CASE WHEN generate_series % 2 = 0 THEN 280.00 ELSE 180.00 END,
-  CASE WHEN generate_series <= 2 THEN 'occupied' ELSE 'available' END
+  CASE WHEN generate_series <= 2 THEN 'occupied'::storage_unit_status ELSE 'available'::storage_unit_status END
 FROM generate_series(1, 8);
 
 -- ============================================

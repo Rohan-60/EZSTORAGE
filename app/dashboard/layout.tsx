@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/contexts/AuthContext'
 
 const navigationItems = [
     {
@@ -63,6 +64,7 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     const pathname = usePathname()
+    const { user, signOut } = useAuth()
 
     return (
         <div className="flex h-screen bg-secondary-50">
@@ -100,15 +102,28 @@ export default function DashboardLayout({
 
                 {/* User Profile */}
                 <div className="p-4 border-t border-secondary-200">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                            <span className="text-primary-700 font-semibold">A</span>
+                            <span className="text-primary-700 font-semibold">
+                                {user?.email?.charAt(0).toUpperCase() || 'U'}
+                            </span>
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-secondary-900 truncate">Admin User</p>
-                            <p className="text-xs text-secondary-500">admin@ezstorage.sg</p>
+                            <p className="text-sm font-medium text-secondary-900 truncate">
+                                {user?.email?.split('@')[0] || 'User'}
+                            </p>
+                            <p className="text-xs text-secondary-500 truncate">{user?.email || ''}</p>
                         </div>
                     </div>
+                    <button
+                        onClick={() => signOut()}
+                        className="w-full px-3 py-2 text-sm text-error hover:bg-red-50 rounded-lg transition-colors flex items-center gap-2 justify-center"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Sign Out
+                    </button>
                 </div>
             </div>
 

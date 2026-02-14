@@ -47,7 +47,7 @@ export default function OperationsPanel() {
         scheduled_date: '',
         time_slot: 'morning',
         pickup_address: '',
-        notes: '',
+        internal_notes: '',
     })
 
     const handleCreateOrder = async (e: React.FormEvent) => {
@@ -63,8 +63,8 @@ export default function OperationsPanel() {
                 customer_id: formData.customer_id,
                 job_type: formData.job_type,
                 scheduled_date: formData.scheduled_date,
-                pickup_address: formData.pickup_address,
-                notes: formData.notes,
+                pickup_address_line1: formData.pickup_address,
+                internal_notes: formData.internal_notes,
                 status: 'pending',
             })
 
@@ -76,7 +76,7 @@ export default function OperationsPanel() {
                 scheduled_date: '',
                 time_slot: 'morning',
                 pickup_address: '',
-                notes: '',
+                internal_notes: '',
             })
         } catch (error: any) {
             toast.error(error.message || 'Failed to create order')
@@ -427,8 +427,8 @@ export default function OperationsPanel() {
                                     className="input"
                                     rows={3}
                                     placeholder="Any special instructions..."
-                                    value={formData.notes}
-                                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                                    value={formData.internal_notes}
+                                    onChange={(e) => setFormData({ ...formData, internal_notes: e.target.value })}
                                 ></textarea>
                             </div>
 

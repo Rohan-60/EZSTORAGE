@@ -282,7 +282,7 @@ async function testCRUDOperations() {
         console.log('✓ SOFT DELETE - Working')
         console.log('✓ HARD DELETE - Working')
         console.log('✓ COMPLEX QUERIES - Working')
-        
+
         log('\n🎉 Database CRUD operations are fully functional!\n', 'green')
 
     } catch (err: any) {

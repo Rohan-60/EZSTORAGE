@@ -43,29 +43,29 @@ function header(msg: string) {
 
 async function quickSetup() {
     header('EZSTORAGE QUICK SETUP')
-    
+
     const supabase = createClient(supabaseUrl, supabaseAnonKey)
-    
+
     try {
         // Check if data already exists
         const { count: whCount } = await supabase
             .from('warehouses')
             .select('*', { count: 'exact', head: true })
-        
+
         const { count: staffCount } = await supabase
             .from('staff')
             .select('*', { count: 'exact', head: true })
-        
+
         if (whCount && whCount > 0 && staffCount && staffCount > 0) {
             info('Data already exists in database')
             log('\nExisting records:', 'cyan')
             log(`  Warehouses: ${whCount}`, 'yellow')
             log(`  Staff: ${staffCount}`, 'yellow')
-            
+
             const { data: staff } = await supabase
                 .from('staff')
                 .select('email, role, auth_user_id')
-            
+
             log('\nStaff members:', 'cyan')
             staff?.forEach((s: any) => {
                 log(`  • ${s.email} (${s.role}) ${s.auth_user_id ? '✓' : '✗'}`, 'yellow')
@@ -74,7 +74,7 @@ async function quickSetup() {
             // Create warehouse
             header('CREATING WAREHOUSE')
             info('Creating test warehouse...')
-            
+
             const { data: warehouse, error: whError } = await supabase
                 .from('warehouses')
                 .insert({
@@ -88,14 +88,14 @@ async function quickSetup() {
                 })
                 .select()
                 .single()
-            
+
             if (whError) throw whError
             success('Warehouse created!')
-            
+
             // Create admin staff
             header('CREATING ADMIN STAFF')
             info('Creating admin user...')
-            
+
             const { data: staff, error: staffError } = await supabase
                 .from('staff')
                 .insert({
@@ -110,20 +110,20 @@ async function quickSetup() {
                 })
                 .select()
                 .single()
-            
+
             if (staffError) throw staffError
             success('Admin staff created!')
-            
+
             // Create storage units
             header('CREATING STORAGE UNITS')
             info('Creating 3 storage units...')
-            
+
             const units = [
                 { unit_number: 'A001', size_label: 'Small', monthly_rate: 180.00 },
                 { unit_number: 'A002', size_label: 'Medium', monthly_rate: 280.00 },
                 { unit_number: 'A003', size_label: 'Large', monthly_rate: 450.00 }
             ]
-            
+
             for (const unit of units) {
                 const { error: unitError } = await supabase
                     .from('storage_units')
@@ -138,24 +138,24 @@ async function quickSetup() {
                         height_cm: 250,
                         status: 'available'
                     })
-                
+
                 if (unitError) throw unitError
                 success(`Created unit ${unit.unit_number} (${unit.size_label})`)
             }
         }
-        
+
         // Create auth user
         header('CREATING AUTH USER FOR LOGIN')
         info('Creating authentication user...')
-        
+
         const adminEmail = 'admin@test.com'
         const adminPassword = 'Admin123!'
-        
+
         const { data: authData, error: authError } = await supabase.auth.signUp({
             email: adminEmail,
             password: adminPassword
         })
-        
+
         if (authError) {
             if (authError.message.includes('already registered')) {
                 info('Auth user already exists')
@@ -164,43 +164,43 @@ async function quickSetup() {
             }
         } else if (authData.user) {
             success('Auth user created!')
-            
+
             // Link auth user to staff
             const { error: linkError } = await supabase
                 .from('staff')
                 .update({ auth_user_id: authData.user.id })
                 .eq('email', adminEmail)
-            
+
             if (linkError) {
                 error('Could not link auth user to staff')
             } else {
                 success('Linked auth user to staff record!')
             }
         }
-        
+
         // Final summary
         header('✅ SETUP COMPLETE!')
-        
+
         log('\nYour EZSTORAGE system is ready!\n', 'green')
-        
+
         log('🔐 LOGIN CREDENTIALS:', 'cyan')
         log(`   Email: ${adminEmail}`, 'yellow')
         log(`   Password: ${adminPassword}\n`, 'yellow')
-        
+
         log('🚀 TO TEST LOGIN:\n', 'cyan')
         log('1. Start the server:', 'cyan')
         log('   npm run dev\n', 'yellow')
-        
+
         log('2. Open browser:', 'cyan')
         log('   http://localhost:3000/login\n', 'yellow')
-        
+
         log('3. Login with the credentials above\n', 'cyan')
-        
+
         log('4. You should be redirected to:', 'cyan')
         log('   http://localhost:3000/dashboard/admin\n', 'yellow')
-        
+
         log('✨ All database operations verified and working!\n', 'green')
-        
+
     } catch (err: any) {
         error(`Setup failed: ${err.message}`)
         console.error(err)

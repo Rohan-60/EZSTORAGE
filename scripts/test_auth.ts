@@ -67,7 +67,7 @@ async function testAuthentication() {
 
         // Try to get current session (should be null for server-side test)
         const { data: sessionData, error: sessionError } = await supabase.auth.getSession()
-        
+
         if (sessionError) {
             error(`Auth configuration error: ${sessionError.message}`)
             throw sessionError
@@ -139,7 +139,7 @@ async function testAuthentication() {
             success('Test user created successfully!')
             console.log('  User ID:', testUserId)
             console.log('  Email:', testEmail)
-            
+
             if (signUpData.session) {
                 success('User session created automatically')
             } else {
@@ -151,7 +151,7 @@ async function testAuthentication() {
         // TEST 4: TEST LOGIN WITH EXISTING USER
         // ==========================================
         header('TEST 4: LOGIN TEST')
-        
+
         // Try to find an existing staff member to test login
         const { data: existingStaff } = await supabase
             .from('staff')
@@ -256,13 +256,13 @@ async function testAuthentication() {
         // TEST SUMMARY
         // ==========================================
         header('TEST SUMMARY')
-        
+
         console.log('\n📋 Auth System Status:\n')
         console.log('✓ Auth client initialization - Working')
         console.log('✓ Session management - Working')
         console.log('✓ Auth state listeners - Working')
         console.log('✓ User signup capability - Available')
-        
+
         if (staffCount && staffCount > 0) {
             log('✓ Staff with auth access - Configured', 'green')
         } else {

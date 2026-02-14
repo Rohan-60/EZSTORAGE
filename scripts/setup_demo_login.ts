@@ -110,10 +110,10 @@ async function setupDemoLogin() {
         // STEP 3: CREATE DEMO AUTH USERS
         // ==========================================
         header('STEP 3: DEMO AUTH USER SETUP')
-        
+
         if (existingStaff && existingStaff.length > 0) {
             info('Attempting to create demo auth users...')
-            
+
             const demoUsers = [
                 { email: 'admin@ezstorage.sg', password: 'Admin123!', role: 'Admin' },
                 { email: 'ops@ezstorage.sg', password: 'Ops123!', role: 'Operations Manager' },
@@ -137,7 +137,7 @@ async function setupDemoLogin() {
                 } else if (data.user) {
                     success(`Created auth user: ${demo.email}`)
                     createdUsers.push({ ...demo, userId: data.user.id, status: 'created' })
-                    
+
                     // Try to link to staff record
                     const { error: linkError } = await supabase
                         .from('staff')
@@ -155,7 +155,7 @@ async function setupDemoLogin() {
             if (createdUsers.length > 0) {
                 header('🎉 DEMO LOGIN CREDENTIALS')
                 log('\nYou can now test the login system with these credentials:\n', 'green')
-                
+
                 createdUsers.forEach((user, index) => {
                     log(`${index + 1}. ${user.email}`, 'cyan')
                     log(`   Password: ${user.password}`, 'cyan')
@@ -241,7 +241,7 @@ async function setupDemoLogin() {
         // FINAL SUMMARY
         // ==========================================
         header('✨ COMPLETE SYSTEM TEST SUMMARY')
-        
+
         log('\n✅ All Systems Operational!\n', 'green')
         console.log('Database Status:')
         console.log('  ✓ Connection - Working')
@@ -256,17 +256,17 @@ async function setupDemoLogin() {
         console.log('  ✓ Session Management - Working')
 
         header('🚀 NEXT STEPS - TEST YOUR LOGIN')
-        
+
         log('\n1. Start the development server:', 'cyan')
         log('   npm run dev\n', 'yellow')
-        
+
         log('2. Open your browser:', 'cyan')
         log('   http://localhost:3000/login\n', 'yellow')
-        
+
         log('3. Login with these credentials:', 'cyan')
         log('   Email: admin@ezstorage.sg', 'yellow')
         log('   Password: Admin123!\n', 'yellow')
-        
+
         log('4. After login, you should:', 'cyan')
         console.log('   • Be redirected to the admin dashboard')
         console.log('   • See your user info in the UI')

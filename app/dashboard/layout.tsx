@@ -64,7 +64,28 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     const pathname = usePathname()
-    const { user, signOut } = useAuth()
+    const { user, staff, userRole, signOut } = useAuth()
+
+    // Helper function to format role display
+    const formatRole = (role: string | null) => {
+        if (!role) return ''
+        const roleMap: { [key: string]: string } = {
+            admin: 'Admin',
+            operations_manager: 'Operations Manager',
+            warehouse_staff: 'Warehouse Staff',
+            driver: 'Driver',
+            accountant: 'Accountant',
+        }
+        return roleMap[role] || role
+    }
+
+    // Filter navigation items based on user role
+    const visibleNavItems = navigationItems.filter((item) => {
+        // If no role yet (loading), show all items temporarily
+        if (!userRole) return true
+        // Check if user's role is in the allowed roles for this nav item
+        return item.roles.includes(userRole)
+    })
 
     return (
         <div className="flex h-screen bg-secondary-50">
@@ -82,7 +103,7 @@ export default function DashboardLayout({
 
                 {/* Navigation */}
                 <nav className="flex-1 p-4 space-y-1">
-                    {navigationItems.map((item) => {
+                    {visibleNavItems.map((item) => {
                         const isActive = pathname.startsWith(item.href)
                         return (
                             <Link
@@ -105,14 +126,16 @@ export default function DashboardLayout({
                     <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-primary-700 font-semibold">
-                                {user?.email?.charAt(0).toUpperCase() || 'U'}
+                                {staff?.first_name?.charAt(0).toUpperCase() || user?.email?.charAt(0).toUpperCase() || 'U'}
                             </span>
                         </div>
                         <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-secondary-900 truncate">
-                                {user?.email?.split('@')[0] || 'User'}
+                                {staff ? `${staff.first_name} ${staff.last_name}` : user?.email?.split('@')[0] || 'User'}
                             </p>
-                            <p className="text-xs text-secondary-500 truncate">{user?.email || ''}</p>
+                            <p className="text-xs text-secondary-500 truncate">
+                                {formatRole(userRole) || user?.email || ''}
+                            </p>
                         </div>
                     </div>
                     <button

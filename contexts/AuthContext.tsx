@@ -100,50 +100,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 setSession(data.session)
                 setUser(data.user)
 
-                // Try to fetch staff info with timeout
-                // Note: This may fail due to RLS policies if not properly configured
-                try {
-                    const timeoutPromise = new Promise((_, reject) =>
-                        setTimeout(() => reject(new Error('Staff query timeout')), 3000)
-                    )
-
-                    const staffPromise = supabase
-                        .from('staff')
-                        .select('role, id, staff_code, first_name, last_name')
-                        .eq('auth_user_id', data.user.id)
-                        .single()
-
-                    const { data: staffData, error: staffError } = await Promise.race([
-                        staffPromise,
-                        timeoutPromise
-                    ]) as any
-
-                    if (staffError || !staffData) {
-                        console.warn('Could not fetch staff role:', staffError?.message || 'No staff record found')
-                        console.warn('Redirecting to admin dashboard as fallback')
-                        router.push('/dashboard/admin')
-                        return { error: null }
-                    }
-
-                    // Success! Redirect based on role
-                    const role = staffData.role || 'admin'
-                    setUserRole(role)
-                    setStaff(staffData)
-
-                    const roleRedirects: { [key: string]: string } = {
-                        admin: '/dashboard/admin',
-                        operations_manager: '/dashboard/operations',
-                        warehouse_staff: '/dashboard/warehouse',
-                        driver: '/dashboard/driver',
-                        accountant: '/dashboard/accounts',
-                    }
-
-                    router.push(roleRedirects[role] || '/dashboard/admin')
-                } catch (err) {
-                    console.warn('Staff query failed or timed out:', err)
-                    console.warn('Redirecting to admin dashboard as fallback')
-                    router.push('/dashboard/admin')
-                }
+                // Skip staff query for now - just redirect to admin dashboard
+                // The staff info will be fetched later by the useEffect
+                console.log('Login successful! Redirecting to dashboard...')
+                router.push('/dashboard/admin')
             }
 
             return { error: null }

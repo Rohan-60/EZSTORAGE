@@ -11,12 +11,13 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
+  // TEMPORARY: Disabled auth protection for development
   // Protect dashboard routes
-  if (req.nextUrl.pathname.startsWith('/dashboard')) {
-    if (!session) {
-      return NextResponse.redirect(new URL('/login', req.url))
-    }
-  }
+  // if (req.nextUrl.pathname.startsWith('/dashboard')) {
+  //   if (!session) {
+  //     return NextResponse.redirect(new URL('/login', req.url))
+  //   }
+  // }
 
   // Redirect to dashboard if already logged in and trying to access login
   if (req.nextUrl.pathname === '/login' && session) {

@@ -113,12 +113,11 @@ export default function LoginPage() {
 
                     {/* Demo Credentials */}
                     <div className="mt-6 p-4 bg-primary-50 rounded-lg">
-                        <p className="text-sm font-semibold text-secondary-700 mb-2">Demo Credentials:</p>
+                        <p className="text-sm font-semibold text-secondary-700 mb-2">Test Credentials:</p>
                         <div className="text-xs text-secondary-600 space-y-1">
-                            <p><strong>Admin:</strong> admin@ezstorage.sg</p>
-                            <p><strong>Operations:</strong> ops@ezstorage.sg</p>
-                            <p><strong>Driver:</strong> driver1@ezstorage.sg</p>
-                            <p className="mt-2 text-primary-600">Password: (Set in Supabase Auth)</p>
+                            <p><strong>Email:</strong> admin@test.com</p>
+                            <p><strong>Password:</strong> (set when creating user in Supabase)</p>
+                            <p className="mt-2 text-primary-600">💡 See QUICK_SETUP.md for setup instructions</p>
                         </div>
                     </div>
                 </div>

@@ -186,3 +186,139 @@ export function useDashboardStats() {
         },
     })
 }
+
+// ===== MUTATION HOOKS =====
+
+// Create a new order
+export function useCreateOrder() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async (orderData: any) => {
+            const { data, error } = await supabase
+                .from('orders')
+                .insert(orderData)
+                .select()
+                .single()
+
+            if (error) throw error
+            return data
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['orders'] })
+            queryClient.invalidateQueries({ queryKey: ['dashboard_stats'] })
+        },
+    })
+}
+
+// Update an existing order
+export function useUpdateOrder() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async ({ id, updates }: { id: string; updates: any }) => {
+            const { data, error } = await supabase
+                .from('orders')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single()
+
+            if (error) throw error
+            return data
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['orders'] })
+            queryClient.invalidateQueries({ queryKey: ['dashboard_stats'] })
+        },
+    })
+}
+
+// Assign driver to order
+export function useAssignDriver() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async ({ orderId, driverId }: { orderId: string; driverId: string }) => {
+            const { data, error } = await supabase
+                .from('orders')
+                .update({ assigned_driver_id: driverId })
+                .eq('id', orderId)
+                .select()
+                .single()
+
+            if (error) throw error
+            return data
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['orders'] })
+        },
+    })
+}
+
+// Update storage unit
+export function useUpdateStorageUnit() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async ({ id, updates }: { id: string; updates: any }) => {
+            const { data, error } = await supabase
+                .from('storage_units')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single()
+
+            if (error) throw error
+            return data
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['storage_units'] })
+            queryClient.invalidateQueries({ queryKey: ['warehouses'] })
+        },
+    })
+}
+
+// Update payment
+export function useUpdatePayment() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async ({ id, updates }: { id: string; updates: any }) => {
+            const { data, error } = await supabase
+                .from('payments')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single()
+
+            if (error) throw error
+            return data
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['payments'] })
+            queryClient.invalidateQueries({ queryKey: ['dashboard_stats'] })
+        },
+    })
+}
+
+// Create a new customer
+export function useCreateCustomer() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async (customerData: any) => {
+            const { data, error } = await supabase
+                .from('customers')
+                .insert(customerData)
+                .select()
+                .single()
+
+            if (error) throw error
+            return data
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['customers'] })
+        },
+    })
+}

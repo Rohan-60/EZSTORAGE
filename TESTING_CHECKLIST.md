@@ -25,26 +25,31 @@
 
 ### Phase 1: Database Setup
 
-- [ ] **Run SQL:** `create_test_staff.sql` in Supabase SQL Editor
-  - Should create 5 staff members
-  - Should create 1 test warehouse
-  - Should show success messages
+⚠️ **CRITICAL FIRST STEP:** Create authentication users or login will fail!
 
-- [ ] **Create Auth Users** in Supabase Dashboard → Authentication → Users
-  - [ ] admin@test.com (Password: Admin123!)
-  - [ ] ops@test.com (Password: Ops123!)
-  - [ ] warehouse@test.com (Password: Warehouse123!)
-  - [ ] driver@test.com (Password: Driver123!)
-  - [ ] accountant@test.com (Password: Accountant123!)
-  - ✅ Remember to check "Auto-confirm user" for each!
+- [ ] **Create AUTH USERS** in Supabase Dashboard → Authentication → Users
+  - Go to: https://xoptdmugsgcmrhemsxed.supabase.co/project/xoptdmugsgcmrhemsxed/auth/users
+  - Click the green **"Add user"** button for EACH user below:
+  
+  - [ ] **User 1:** admin@test.com (Password: Admin123!)
+  - [ ] **User 2:** ops@test.com (Password: Ops123!)
+  - [ ] **User 3:** warehouse@test.com (Password: Warehouse123!)
+  - [ ] **User 4:** driver@test.com (Password: Driver123!)
+  - [ ] **User 5:** accountant@test.com (Password: Accountant123!)
+  
+  ⚠️ **Remember:** Check "Auto Confirm User" for EACH user!
 
-- [ ] **Link Auth Users:** Run `link_auth_users.sql` in SQL Editor
+- [ ] **Link Auth Users:** Run `supabase/link_auth_users.sql` in SQL Editor
   - Should update all 5 staff records with auth_user_id
   - Should show "✅ Linked" for all users
 
-- [ ] **Fix RLS Policies:** Run `rls_development_mode.sql`
+- [ ] **Fix RLS Policies:** Run `supabase/rls_development_mode.sql`
   - Should create permissive policies
   - Should allow data operations without restrictions
+
+- [ ] **Verify Setup:** Run `npm run test:login` in terminal
+  - Should show "✅ Authentication successful" for test users
+  - Should show "✅ Staff info fetched"
 
 ---
 

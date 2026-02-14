@@ -11,13 +11,19 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
-  // TEMPORARY: Disabled auth protection for development
-  // Protect dashboard routes
-  // if (req.nextUrl.pathname.startsWith('/dashboard')) {
-  //   if (!session) {
-  //     return NextResponse.redirect(new URL('/login', req.url))
-  //   }
-  // }
+  // Protect dashboard routes - TEMPORARILY DISABLED to fix redirect loop
+  // The issue is staff table query timing out or failing
+  // TODO: Re-enable after fixing the staff query performance
+  /*
+  if (req.nextUrl.pathname.startsWith('/dashboard')) {
+    if (!session) {
+      // Not logged in - redirect to login
+      return NextResponse.redirect(new URL('/login', req.url))
+    }
+    // User is authenticated - allow access
+    // Role filtering happens in dashboard layout
+  }
+  */
 
   // Redirect to dashboard if already logged in and trying to access login
   if (req.nextUrl.pathname === '/login' && session) {

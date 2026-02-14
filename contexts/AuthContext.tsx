@@ -100,10 +100,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 setSession(data.session)
                 setUser(data.user)
 
-                // Skip staff query for now - just redirect to admin dashboard
-                // The staff info will be fetched later by the useEffect
-                console.log('Login successful! Redirecting to dashboard...')
-                router.push('/dashboard/admin')
+                // Fetch staff role and redirect to appropriate dashboard
+                const { data: staff } = await supabase
+                    .from('staff')
+                    .select('role')
+                    .eq('auth_user_id', data.user.id)
+                    .single()
+
+                const roleRedirects: { [key: string]: string } = {
+                    admin: '/dashboard/admin',
+                    operations_manager: '/dashboard/operations',
+                    warehouse_staff: '/dashboard/warehouse',
+                    driver: '/dashboard/driver',
+                    accountant: '/dashboard/accounts',
+                }
+
+                const redirectPath = staff?.role ? roleRedirects[staff.role] : '/dashboard/admin'
+                console.log('Login successful! Redirecting to:', redirectPath)
+
+                // Use router.replace() now that middleware is disabled
+                router.replace(redirectPath)
             }
 
             return { error: null }

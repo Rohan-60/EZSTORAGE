@@ -17,10 +17,16 @@ export default function LoginPage() {
         setError('')
         setLoading(true)
 
-        const { error } = await signIn(email, password)
+        try {
+            const { error } = await signIn(email, password)
 
-        if (error) {
-            setError(error.message || 'Failed to sign in')
+            if (error) {
+                setError(error.message || 'Failed to sign in')
+            }
+            // Note: Don't reset loading here - let the redirect happen
+            // The page unmounts during navigation anyway
+        } catch (err) {
+            setError('An unexpected error occurred')
             setLoading(false)
         }
     }

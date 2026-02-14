@@ -167,7 +167,7 @@ export default function AccountsPanel() {
                     <h3 className="text-lg font-semibold text-secondary-900 mb-4">Quick Actions</h3>
                     <div className="grid md:grid-cols-2 gap-3">
                         <button
-                            onClick={() => toast.info('Invoice generation coming soon!')}
+                            onClick={() => toast.success('Invoice generation coming soon!')}
                             className="btn btn-primary flex items-center justify-center gap-2"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,7 +176,7 @@ export default function AccountsPanel() {
                             Generate Invoice
                         </button>
                         <button
-                            onClick={() => toast.info('Report export coming soon!')}
+                            onClick={() => toast.success('Report export coming soon!')}
                             className="btn btn-secondary flex items-center justify-center gap-2"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,7 +185,7 @@ export default function AccountsPanel() {
                             Export Report
                         </button>
                         <button
-                            onClick={() => toast.info('Refund processing coming soon!')}
+                            onClick={() => toast.success('Refund processing coming soon!')}
                             className="btn btn-secondary flex items-center justify-center gap-2"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@ export default function AccountsPanel() {
                             Process Refund
                         </button>
                         <button
-                            onClick={() => toast.info('Email reminders sent!')}
+                            onClick={() => toast.success('Email reminders sent!')}
                             className="btn btn-secondary flex items-center justify-center gap-2"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

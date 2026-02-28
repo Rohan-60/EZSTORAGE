@@ -31,7 +31,7 @@ ORDER BY staff_code;
 -- ============================================
 -- STEP 2: Create Auth Users in Supabase
 -- ============================================
--- Go to: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users
+-- Go to: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users
 -- Click "Add user" → "Create new user" for each:
 
 -- 1. admin@ezstorage.sg

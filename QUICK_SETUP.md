@@ -8,7 +8,7 @@ Follow these steps to get your database working with a simple login (NO email ve
 
 **IMPORTANT**: Do this FIRST before creating any users!
 
-1. Go to: [https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/url-configuration](https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/url-configuration)
+1. Go to: [https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/url-configuration](https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/url-configuration)
 
 2. Scroll down to **"Email Auth"** section
 
@@ -25,7 +25,7 @@ Follow these steps to get your database working with a simple login (NO email ve
 
 ## Step 2: Create Database Tables
 
-1. Open Supabase SQL Editor: [https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql](https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql)
+1. Open Supabase SQL Editor: [https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql](https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql)
 
 2. Click "+ New query"
 
@@ -66,7 +66,7 @@ Follow these steps to get your database working with a simple login (NO email ve
 
 ## Step 5: Create ONE Test User
 
-1. Go to Authentication → Users: [https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users](https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users)
+1. Go to Authentication → Users: [https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users](https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users)
 
 2. Click "Add user" → "Create new user"
 
@@ -136,8 +136,8 @@ Follow these steps to get your database working with a simple login (NO email ve
 
 ## Quick Links
 
-- **Supabase Dashboard**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed
-- **SQL Editor**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql
-- **Users**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users
-- **Email Settings**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/url-configuration
+- **Supabase Dashboard**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz
+- **SQL Editor**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql
+- **Users**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users
+- **Email Settings**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/url-configuration
 - **Your App**: http://localhost:3000

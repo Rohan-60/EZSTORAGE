@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
@@ -10,7 +9,6 @@ export default function LoginPage() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const { signIn } = useAuth()
-    const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -91,31 +89,11 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn-primary w-full py-3 text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="btn btn-primary w-full py-3 text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? 'Signing in...' : 'Sign In'}
                         </button>
                     </form>
-
-                    {/* Demo Mode */}
-                    <div className="mt-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-secondary-300"></div>
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white text-secondary-500">Demo Mode (No Auth)</span>
-                            </div>
-                        </div>
-
-                        <button
-                            type="button"
-                            onClick={() => router.push('/dashboard/admin')}
-                            className="mt-4 w-full py-3 px-4 border-2 border-primary-500 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
-                        >
-                            🚀 Skip Login - Go to Dashboard
-                        </button>
-                    </div>
 
                     {/* Demo Credentials */}
                     <div className="mt-6 p-4 bg-primary-50 rounded-lg">

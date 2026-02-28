@@ -15,7 +15,7 @@ Your environment is properly configured:
 ### Step 1: Execute Database Schema (Required)
 
 1. **Open Supabase SQL Editor**  
-   Click: [https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql](https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql)
+   Click: [https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql](https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql)
 
 2. **Create New Query**
    - Click "+ New query" button
@@ -66,7 +66,7 @@ Your environment is properly configured:
 If you executed the seed data, create these user accounts:
 
 1. **Go to Authentication**  
-   Click: [https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users](https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users)
+   Click: [https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users](https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users)
 
 2. **Click "Add user" → "Create new user"**
 

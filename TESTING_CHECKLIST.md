@@ -28,7 +28,7 @@
 ⚠️ **CRITICAL FIRST STEP:** Create authentication users or login will fail!
 
 - [ ] **Create AUTH USERS** in Supabase Dashboard → Authentication → Users
-  - Go to: https://xoptdmugsgcmrhemsxed.supabase.co/project/xoptdmugsgcmrhemsxed/auth/users
+  - Go to: https://bipwsfegdkkjrsinfcjz.supabase.co/project/bipwsfegdkkjrsinfcjz/auth/users
   - Click the green **"Add user"** button for EACH user below:
   
   - [ ] **User 1:** admin@test.com (Password: Admin123!)

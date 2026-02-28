@@ -11,7 +11,7 @@ Now you need to execute the SQL files in your Supabase dashboard to create all t
 ### 2.1 Execute Main Schema (Required)
 
 1. **Open Supabase SQL Editor**  
-   Click here: [Open SQL Editor](https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql)
+   Click here: [Open SQL Editor](https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql)
 
 2. **Create a New Query**  
    - Click the **"+ New query"** button (usually top right)
@@ -158,10 +158,10 @@ Your app should now be connected to Supabase! 🎉
 
 ## 📝 Quick Links
 
-- **Your Supabase Project**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed
-- **SQL Editor**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql
-- **Table Editor**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/editor
-- **Authentication**: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users
+- **Your Supabase Project**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz
+- **SQL Editor**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql
+- **Table Editor**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/editor
+- **Authentication**: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users
 
 ---
 

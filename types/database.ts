@@ -6,6 +6,40 @@ export type StorageUnitStatus = 'available' | 'occupied' | 'reserved' | 'mainten
 export type JobType = 'pickup' | 'delivery' | 'both'
 export type PaymentMethod = 'cash' | 'card' | 'bank_transfer' | 'online' | 'wallet'
 
+// Phase 1 Types
+export type Phase1JobType = 'Move' | 'Store' | 'Dispose' | 'Other'
+export type KanbanColumn = 'confirmation_details' | 'packing' | 'moving' | 'storage' | 'extraction' | 'move_out'
+export type JobVendor = 'Jean' | 'GSX' | 'MoveMove' | 'Other'
+
+// Simplified roles for Phase 1 UI
+export type Phase1Role = 'admin' | 'manager' | 'staff'
+
+// Phase 1 Job
+export interface Job {
+    id: string
+    job_number: string
+    customer_id: string
+    size_plan?: string
+    job_type: Phase1JobType
+    pickup_address?: string
+    pickup_timing?: string
+    destination_address?: string
+    destination_timing?: string
+    stopover?: string
+    storage_location?: string
+    volume?: string
+    assigned_vendor: JobVendor
+    kanban_column: KanbanColumn
+    internal_notes?: string
+    // default stage is confirmation_details
+    created_at: string
+    updated_at: string
+}
+
+export interface JobWithCustomer extends Job {
+    customer?: Pick<Customer, 'id' | 'first_name' | 'last_name' | 'phone' | 'email'>
+}
+
 // Database Tables
 export interface Customer {
     id: string

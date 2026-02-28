@@ -118,7 +118,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 const redirectPath = staff?.role ? roleRedirects[staff.role] : '/dashboard/admin'
                 console.log('Login successful! Redirecting to:', redirectPath)
 
-                // Use router.replace() now that middleware is disabled
+                // Use replace instead of push to prevent back button issues
                 router.replace(redirectPath)
             }
 

@@ -8,7 +8,7 @@
   * {
     @apply border-secondary-300;
   }
-  
+
   body {
     @apply bg-secondary-50 text-secondary-900 antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -16,11 +16,12 @@
 }
 
 @layer components {
+
   /* Card Components */
   .card {
     @apply bg-white rounded-lg shadow-card p-6;
   }
-  
+
   .card-hover {
     @apply transition-shadow duration-200 hover:shadow-card-hover;
   }
@@ -29,20 +30,40 @@
   .btn {
     @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
-  
+
   .btn-primary {
     @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
   }
-  
+
   .btn-secondary {
     @apply bg-secondary-200 text-secondary-800 hover:bg-secondary-300 focus:ring-secondary-400;
   }
-  
+
   .btn-success {
     @apply bg-success text-white hover:bg-green-600 focus:ring-success;
   }
-  
+
   .btn-danger {
+    @apply bg-error text-white hover:bg-red-600 focus:ring-error;
+  }
+
+  .btn-sm {
+    @apply inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-1;
+  }
+
+  .btn-sm.btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500;
+  }
+
+  .btn-sm.btn-secondary {
+    @apply bg-secondary-200 text-secondary-800 hover:bg-secondary-300 focus:ring-secondary-400;
+  }
+
+  .btn-sm.btn-success {
+    @apply bg-success text-white hover:bg-green-600 focus:ring-success;
+  }
+
+  .btn-sm.btn-danger {
     @apply bg-error text-white hover:bg-red-600 focus:ring-error;
   }
 
@@ -50,7 +71,7 @@
   .input {
     @apply w-full px-4 py-2 rounded-lg border border-secondary-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
   }
-  
+
   .input-error {
     @apply border-error focus:ring-error;
   }
@@ -59,23 +80,23 @@
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
   }
-  
+
   .badge-primary {
     @apply bg-primary-100 text-primary-800;
   }
-  
+
   .badge-success {
     @apply bg-green-100 text-green-800;
   }
-  
+
   .badge-warning {
     @apply bg-yellow-100 text-yellow-800;
   }
-  
+
   .badge-error {
     @apply bg-red-100 text-red-800;
   }
-  
+
   .badge-info {
     @apply bg-blue-100 text-blue-800;
   }
@@ -84,15 +105,15 @@
   .table {
     @apply w-full;
   }
-  
+
   .table-header {
     @apply bg-secondary-50 border-b border-secondary-200;
   }
-  
+
   .table-row {
     @apply border-b border-secondary-100 hover:bg-secondary-50 transition-colors;
   }
-  
+
   .table-cell {
     @apply px-6 py-4 text-sm;
   }
@@ -101,7 +122,7 @@
   .metric-card {
     @apply card flex items-center justify-between;
   }
-  
+
   .metric-icon {
     @apply w-12 h-12 rounded-lg flex items-center justify-center;
   }
@@ -111,15 +132,15 @@
   .text-gradient {
     @apply bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent;
   }
-  
+
   .sidebar-item {
     @apply flex items-center gap-3 px-4 py-3 rounded-lg transition-all cursor-pointer;
   }
-  
+
   .sidebar-item-active {
     @apply bg-primary-500 text-white;
   }
-  
+
   .sidebar-item-inactive {
     @apply text-secondary-600 hover:bg-secondary-100;
   }

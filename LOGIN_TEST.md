@@ -26,7 +26,7 @@ If you remember the password used when creating these users, try logging in with
 
 ### Option B: Reset Password in Supabase
 
-1. Go to: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users
+1. Go to: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users
 
 2. Click on a user (e.g., admin@ezstorage.sg)
 

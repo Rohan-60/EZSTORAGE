@@ -59,7 +59,7 @@ async function checkAuthUsers() {
         console.log('\n─'.repeat(70))
         console.log('\n💡 Next Steps:')
         console.log('1. If all logins failed, you need to CREATE auth users in Supabase Dashboard')
-        console.log('2. Go to: https://xoptdmugsgcmrhemsxed.supabase.co/project/xoptdmugsgcmrhemsxed/auth/users')
+        console.log('2. Go to: https://bipwsfegdkkjrsinfcjz.supabase.co/project/bipwsfegdkkjrsinfcjz/auth/users')
         console.log('3. Click "Add user" and create each user with:')
         console.log('   - Email from the list above')
         console.log('   - Password: Admin123! (or your chosen password)')

@@ -9,7 +9,7 @@ Your staff records exist in the database, but **authentication users don't exist
 ## 📋 Quick Setup Steps
 
 ### Step 1: Open Supabase Dashboard
-1. Go to: https://xoptdmugsgcmrhemsxed.supabase.co/project/xoptdmugsgcmrhemsxed/auth/users
+1. Go to: https://bipwsfegdkkjrsinfcjz.supabase.co/project/bipwsfegdkkjrsinfcjz/auth/users
 2. Click the green **"Add user"** button
 
 ### Step 2: Create These 5 Users

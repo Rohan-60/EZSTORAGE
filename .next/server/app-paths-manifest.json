@@ -1,8 +1,12 @@
 {
-  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
   "/dashboard/admin/page": "app/dashboard/admin/page.js",
-  "/dashboard/accounts/page": "app/dashboard/accounts/page.js",
+  "/dashboard/kanban/page": "app/dashboard/kanban/page.js",
+  "/dashboard/customers/page": "app/dashboard/customers/page.js",
+  "/dashboard/customers/new/page": "app/dashboard/customers/new/page.js",
+  "/dashboard/jobs/page": "app/dashboard/jobs/page.js",
+  "/dashboard/jobs/new/page": "app/dashboard/jobs/new/page.js",
+  "/dashboard/jobs/[id]/page": "app/dashboard/jobs/[id]/page.js",
   "/dashboard/warehouse/page": "app/dashboard/warehouse/page.js",
-  "/dashboard/operations/page": "app/dashboard/operations/page.js",
-  "/dashboard/driver/page": "app/dashboard/driver/page.js"
+  "/login/page": "app/login/page.js"
 }

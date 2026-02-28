@@ -56,12 +56,7 @@ export default function HomePage() {
                     >
                         Sign In to Dashboard
                     </Link>
-                    <Link
-                        href="/demo"
-                        className="px-8 py-4 bg-white text-secondary-900 rounded-xl font-semibold hover:bg-secondary-50 transition-all border-2 border-secondary-200"
-                    >
-                        View Demo
-                    </Link>
+
                 </div>
 
                 {/* Tech Stack Badge */}

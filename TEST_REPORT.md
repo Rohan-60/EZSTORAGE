@@ -10,7 +10,7 @@
 ### ✅ Database Connection
 - **Status:** PASSED ✓
 - **Test:** Connected to Supabase database successfully
-- **URL:** https://xoptdmugsgcmrhemsxed.supabase.co
+- **URL:** https://bipwsfegdkkjrsinfcjz.supabase.co
 - **Verification:** All tables exist and are accessible
 
 ### ✅ CRUD Operations (Create, Read, Update, Delete)
@@ -58,7 +58,7 @@ However, this requires proper setup before testing the login system.
 
 **Step 1: Insert Demo Data via SQL Editor**
 
-1. Go to Supabase Dashboard: https://xoptdmugsgcmrhemsxed.supabase.com/dashboard/project
+1. Go to Supabase Dashboard: https://bipwsfegdkkjrsinfcjz.supabase.com/dashboard/project
 2. Click **SQL Editor** in the left sidebar
 3. Copy and paste the content from: `supabase/seed_minimal.sql`
 4. Click **Run**

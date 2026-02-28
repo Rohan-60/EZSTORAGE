@@ -28,7 +28,7 @@
 
 ### Step 1: Create Test Staff in Database
 
-1. Go to Supabase SQL Editor: https://xoptdmugsgcmrhemsxed.supabase.com/dashboard/project
+1. Go to Supabase SQL Editor: https://bipwsfegdkkjrsinfcjz.supabase.com/dashboard/project
 2. Open and run: [supabase/create_test_staff.sql](supabase/create_test_staff.sql)
 
 This creates 5 staff members:

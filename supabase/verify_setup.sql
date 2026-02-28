@@ -5,7 +5,7 @@
 -- It's safe to run multiple times (idempotent where possible)
 -- 
 -- Run this in: Supabase SQL Editor
--- Direct link: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql
+-- Direct link: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql
 
 -- ============================================
 -- STEP 1: ENABLE EXTENSIONS

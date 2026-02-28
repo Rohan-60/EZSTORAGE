@@ -1,13 +1,15 @@
 'use client'
 
+import Link from 'next/link'
 import { formatCurrency, formatDate, getStatusColor, cn } from '@/lib/utils'
-import { useDashboardStats, useOrders, useWarehouses } from '@/lib/hooks/useSupabase'
+import { useDashboardStats, useOrders, useWarehouses, useJobStats } from '@/lib/hooks/useSupabase'
 
 export default function AdminDashboard() {
     // Fetch real data from Supabase
     const { data: stats, isLoading: statsLoading } = useDashboardStats()
     const { data: orders, isLoading: ordersLoading } = useOrders()
     const { data: warehouses, isLoading: warehousesLoading } = useWarehouses()
+    const { data: jobStats } = useJobStats()
 
     // Calculate order counts by status
     const ordersByStatus = orders ? [
@@ -83,6 +85,46 @@ export default function AdminDashboard() {
 
     return (
         <div className="space-y-6">
+            {/* Phase 1 Job Stats */}
+            <div>
+                <h3 className="text-sm font-semibold text-secondary-500 uppercase tracking-wider mb-3">Job Pipeline</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Link href="/dashboard/jobs" className="card card-hover flex items-center gap-4 group">
+                        <div className="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-200 transition-colors">
+                            <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-xs text-secondary-500 mb-0.5">Outstanding Jobs</p>
+                            <p className="text-3xl font-bold text-secondary-900">{jobStats?.outstanding ?? '—'}</p>
+                        </div>
+                    </Link>
+                    <Link href="/dashboard/kanban" className="card card-hover flex items-center gap-4 group">
+                        <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
+                            <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-xs text-secondary-500 mb-0.5">Completed This Week</p>
+                            <p className="text-3xl font-bold text-secondary-900">{jobStats?.completedThisWeek ?? '—'}</p>
+                        </div>
+                    </Link>
+                    <Link href="/dashboard/kanban" className="card card-hover flex items-center gap-4 group">
+                        <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200 transition-colors">
+                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-xs text-secondary-500 mb-0.5">Completed This Month</p>
+                            <p className="text-3xl font-bold text-secondary-900">{jobStats?.completedThisMonth ?? '—'}</p>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+
             {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {kpiData.map((kpi, index) => (

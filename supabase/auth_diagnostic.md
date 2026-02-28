@@ -11,12 +11,12 @@ Since RLS is already disabled, the login issue is likely:
 ## Quick Diagnosis
 
 ### Option 1: Run SQL Check
-1. Open: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/sql/new
+1. Open: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/sql/new
 2. Copy and run: [`check_auth_status.sql`](file:///d:/react%20project/EZSTORAGE/supabase/check_auth_status.sql)
 3. Look for ❌ indicators
 
 ### Option 2: Check Authentication Panel
-1. Go to: https://supabase.com/dashboard/project/xoptdmugsgcmrhemsxed/auth/users
+1. Go to: https://supabase.com/dashboard/project/bipwsfegdkkjrsinfcjz/auth/users
 2. **Do you see ANY users listed?**
    - If NO → Need to create users
    - If YES → Check if emails match staff table

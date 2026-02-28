@@ -38,10 +38,10 @@ async function checkAuthUsers() {
 
         // Test with known passwords
         const passwords = ['Admin123!', 'admin123', 'Admin123', 'password']
-        
+
         for (const staff of staffData || []) {
             console.log(`\n📧 ${staff.email}`)
-            
+
             for (const password of passwords) {
                 const { data, error } = await supabase.auth.signInWithPassword({
                     email: staff.email,
@@ -65,7 +65,7 @@ async function checkAuthUsers() {
         console.log('   - Password: Admin123! (or your chosen password)')
         console.log('   - ✅ Check "Auto Confirm User"')
         console.log('4. After creating users, run: supabase/link_auth_users.sql')
-        
+
     } catch (err) {
         console.error('❌ Unexpected error:', err)
     }
